@@ -3,7 +3,7 @@
 Element::Element (const char *name, float acidity, float bitterness){
     this->name << name;
     this->acidity = acidity;
-    this->bitterness = acidity;
+    this->bitterness = bitterness;
 }
 
 bool Element::isNeutral (){
