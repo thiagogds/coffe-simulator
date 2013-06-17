@@ -17,9 +17,9 @@ void App::init() {
     cubeElements->init();
 
     Events::cubeTouch.set(&App::onTouch, this);
-    //Events::neighborAdd.set(&App::onNeighborAdd, this);
-    //Events::neighborRemove.set(&App::onNeighborRemove, this);
     Events::cubeAccelChange.set(&App::onAccelChange, this);
+    Events::neighborAdd.set(&App::onNeighborAdd, this);
+    Events::neighborRemove.set(&App::onNeighborRemove, this);
 }
 
 void App::run() {
@@ -38,77 +38,6 @@ void App::onTouch(unsigned id) {
     };
 }
 
-//void App::onNeighborAdd(unsigned firstID,
-//                        unsigned firstSide,
-//                        unsigned secondID,
-//                        unsigned secondSide) {
-//    switch(firstID) {
-//        default: ; break ;
-//        case 0:
-//            cubeElements->onNeighborAdd(firstID,
-//                                      firstSide,
-//                                      secondID,
-//                                      secondSide);
-//            break ;
-//        //case 3:
-//        //    cubeCup->onNeighborAdd(firstID,
-//        //                                   firstSide,
-//        //                                   secondID,
-//        //                                   secondSide);
-//        //    break ;
-//    };
-//
-//    switch(secondID) {
-//        case 0:
-//            cubeElements->onNeighborAdd(secondID,
-//                                      secondSide,
-//                                      firstID,
-//                                      firstSide);
-//            break ;
-//        //case 3:
-//        //    cubeCup->onNeighborAdd(secondID,
-//        //                                   secondSide,
-//        //                                   firstID,
-//        //                                   firstSide);
-//        //    break ;
-//    };
-//}
-//
-//void App::onNeighborRemove(unsigned firstID,
-//                           unsigned firstSide,
-//                           unsigned secondID,
-//                           unsigned secondSide) {
-//    switch(firstID) {
-//        default: ; break ;
-//        case 0:
-//            cubeElements->onNeighborRemove(firstID,
-//                                         firstSide,
-//                                         secondID,
-//                                         secondSide);
-//            break ;
-//        //case 3:
-//        //    cubeCup->onNeighborRemove(firstID,
-//        //                                      firstSide,
-//        //                                      secondID,
-//        //                                      secondSide);
-//        //    break ;
-//    };
-//
-//    switch(secondID) {
-//        case 0:
-//            cubeElements->onNeighborRemove(secondID,
-//                                         secondSide,
-//                                         firstID,
-//                                         firstSide);
-//            break ;
-//        //case 3:
-//        //    cubeCup->onNeighborRemove(secondID,
-//        //                                      secondSide,
-//        //                                      firstID,
-//        //                                      firstSide);
-//        //    break ;
-//    };
-//}
 void App::onAccelChange(unsigned id) {
     switch(id) {
         default: ; break ;
@@ -116,3 +45,74 @@ void App::onAccelChange(unsigned id) {
     };
 }
 
+void App::onNeighborAdd(unsigned firstID,
+                        unsigned firstSide,
+                        unsigned secondID,
+                        unsigned secondSide) {
+    switch(firstID) {
+        default: ; break ;
+        case 0:
+            cubeElements->onNeighborAdd(firstID,
+                                      firstSide,
+                                      secondID,
+                                      secondSide);
+            break ;
+        //case 3:
+        //    cubeCup->onNeighborAdd(firstID,
+        //                                   firstSide,
+        //                                   secondID,
+        //                                   secondSide);
+        //    break ;
+    };
+
+    switch(secondID) {
+        case 0:
+            cubeElements->onNeighborAdd(secondID,
+                                      secondSide,
+                                      firstID,
+                                      firstSide);
+            break ;
+        //case 3:
+        //    cubeCup->onNeighborAdd(secondID,
+        //                                   secondSide,
+        //                                   firstID,
+        //                                   firstSide);
+        //    break ;
+    };
+}
+
+void App::onNeighborRemove(unsigned firstID,
+                           unsigned firstSide,
+                           unsigned secondID,
+                           unsigned secondSide) {
+    switch(firstID) {
+        default: ; break ;
+        case 0:
+            cubeElements->onNeighborRemove(firstID,
+                                         firstSide,
+                                         secondID,
+                                         secondSide);
+            break ;
+        //case 3:
+        //    cubeCup->onNeighborRemove(firstID,
+        //                                      firstSide,
+        //                                      secondID,
+        //                                      secondSide);
+        //    break ;
+    };
+
+    switch(secondID) {
+        case 0:
+            cubeElements->onNeighborRemove(secondID,
+                                         secondSide,
+                                         firstID,
+                                         firstSide);
+            break ;
+        //case 3:
+        //    cubeCup->onNeighborRemove(secondID,
+        //                                      secondSide,
+        //                                      firstID,
+        //                                      firstSide);
+        //    break ;
+    };
+}

@@ -29,6 +29,7 @@ public:
     VideoBuffer vid;
 
     unsigned activeElement;
+    bool connectedToExtractor;
 
     Element water;
     Element citric;
@@ -44,15 +45,15 @@ public:
     void rotate();
     Element* getCurrentElement();
     void onTouch(unsigned id);
-    //void onNeighborAdd(unsigned firstID,
-    //                   unsigned firstSide,
-    //                   unsigned secondID,
-    //                   unsigned secondSide);
-    //void onNeighborRemove(unsigned firstID,
-    //                      unsigned firstSide,
-    //                      unsigned secondID,
-    //                      unsigned secondSide);
     void onAccelChange(unsigned id);
+    void onNeighborAdd(unsigned firstID,
+                       unsigned firstSide,
+                       unsigned secondID,
+                       unsigned secondSide);
+    void onNeighborRemove(unsigned firstID,
+                          unsigned firstSide,
+                          unsigned secondID,
+                          unsigned secondSide);
 
 };
 
@@ -73,6 +74,12 @@ public:
     Extractor expresso;
 
     Extractor* extractors[EXTRACTORS_NUMBER];
+
+    Element mixedElement;
+
+    //Pode ser que tenhamos que colocar como ponteiro para usar static.
+    ElementVolumeWrapper elements[ELEMENTS_NUMBER];
+    ElementVolumeWrapper mixedWrapper;
 
     void init();
     void rotate();

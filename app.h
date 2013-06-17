@@ -20,15 +20,15 @@ public:
     NOINLINE void init();
     NOINLINE void run();
     void onTouch(unsigned id);
-    //void onNeighborAdd(unsigned firstID,
-    //                   unsigned firstSide,
-    //                   unsigned secondID,
-    //                   unsigned secondSide);
-    //void onNeighborRemove(unsigned firstID,
-    //                      unsigned firstSide,
-    //                      unsigned secondID,
-    //                      unsigned secondSide);
     void onAccelChange(unsigned id);
+    void onNeighborAdd(unsigned firstID,
+                       unsigned firstSide,
+                       unsigned secondID,
+                       unsigned secondSide);
+    void onNeighborRemove(unsigned firstID,
+                          unsigned firstSide,
+                          unsigned secondID,
+                          unsigned secondSide);
 };
 
 
