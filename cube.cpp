@@ -1,5 +1,6 @@
 #include "cube.h"
 #include "app.h"
+#include "calculators.h"
 #include "extractor.h"
 #include "element.h"
 
@@ -92,6 +93,7 @@ void CubeExtractor::addElement(Element* element, float volume) {
     for(unsigned i = 0 ; i < ELEMENTS_NUMBER ; i++) {
         if(elements[i].element->isSameType(element)) {
             elements[i].volume += volume;
+            Calculator::mixTwoElements(mApp->cubeExtractor, i);
             break;
         }
     }
@@ -111,9 +113,9 @@ void CubeElements::onTouch(unsigned id) {
     if(cube.isTouching()){
         if(connectedToExtractor) {
             mApp->cubeExtractor->addElement(elements[activeElement], SET_VOLUME);
-            for(unsigned i = 0 ; i < ELEMENTS_NUMBER ; i++){
-                LOG("Volume: %f \n", mApp->cubeExtractor->elements[i].volume);
-            }
+            //LOG("Amargor: %f \n", mApp->cubeExtractor->mixedElement.bitterness);
+            //LOG("Acidez: %f \n", mApp->cubeExtractor->mixedElement.acidity);
+            //LOG("Volume: %f \n", mApp->cubeExtractor->mixedWrapper.volume);
         }
     }
 

@@ -8,7 +8,8 @@ OBJS = \
     app.o \
     cube.o \
     extractor.o \
-    element.o
+    element.o \
+    calculators.o
 
 ASSETDEPS += *.png $(ASSETS).lua
 CDEPS += *.h
