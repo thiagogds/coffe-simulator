@@ -87,4 +87,28 @@ public:
     void onTouch(unsigned id);
 };
 
+class CubeCup{
+public:
+    CubeCup(CubeID cube, App* app);
+
+    CubeID mCube;
+    App* mApp;
+
+    VideoBuffer vid;
+    bool calculateOn;
+
+    void init();
+    void calculate();
+    void onNeighborAdd(unsigned firstID,
+                       unsigned firstSide,
+                       unsigned secondID,
+                       unsigned secondSide);
+    void onNeighborRemove(unsigned firstID,
+                          unsigned firstSide,
+                          unsigned secondID,
+                          unsigned secondSide);
+
+};
+
+
 #endif

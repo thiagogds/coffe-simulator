@@ -13,8 +13,12 @@ void App::init() {
     static CubeExtractor cExtrator = CubeExtractor(1,this);
     cubeExtractor = &cExtrator;
 
+    static CubeCup cCup = CubeCup(2,this);
+    cubeCup = &cCup;
+
     cubeExtractor->init();
     cubeElements->init();
+    cubeCup->init();
 
     Events::cubeTouch.set(&App::onTouch, this);
     Events::cubeAccelChange.set(&App::onAccelChange, this);
@@ -26,6 +30,7 @@ void App::run() {
     TimeStep ts;
     while(true) {
         System::paint();
+        cubeCup->calculate();
         ts.next();
     }
 }
@@ -57,12 +62,12 @@ void App::onNeighborAdd(unsigned firstID,
                                       secondID,
                                       secondSide);
             break ;
-        //case 3:
-        //    cubeCup->onNeighborAdd(firstID,
-        //                                   firstSide,
-        //                                   secondID,
-        //                                   secondSide);
-        //    break ;
+        case 2:
+            cubeCup->onNeighborAdd(firstID,
+                                           firstSide,
+                                           secondID,
+                                           secondSide);
+            break ;
     };
 
     switch(secondID) {
@@ -72,12 +77,12 @@ void App::onNeighborAdd(unsigned firstID,
                                       firstID,
                                       firstSide);
             break ;
-        //case 3:
-        //    cubeCup->onNeighborAdd(secondID,
-        //                                   secondSide,
-        //                                   firstID,
-        //                                   firstSide);
-        //    break ;
+        case 2:
+            cubeCup->onNeighborAdd(secondID,
+                                           secondSide,
+                                           firstID,
+                                           firstSide);
+            break ;
     };
 }
 
@@ -93,12 +98,12 @@ void App::onNeighborRemove(unsigned firstID,
                                          secondID,
                                          secondSide);
             break ;
-        //case 3:
-        //    cubeCup->onNeighborRemove(firstID,
-        //                                      firstSide,
-        //                                      secondID,
-        //                                      secondSide);
-        //    break ;
+        case 2:
+            cubeCup->onNeighborRemove(firstID,
+                                              firstSide,
+                                              secondID,
+                                              secondSide);
+            break ;
     };
 
     switch(secondID) {
@@ -108,11 +113,11 @@ void App::onNeighborRemove(unsigned firstID,
                                          firstID,
                                          firstSide);
             break ;
-        //case 3:
-        //    cubeCup->onNeighborRemove(secondID,
-        //                                      secondSide,
-        //                                      firstID,
-        //                                      firstSide);
-        //    break ;
+        case 2:
+            cubeCup->onNeighborRemove(secondID,
+                                              secondSide,
+                                              firstID,
+                                              firstSide);
+            break ;
     };
 }

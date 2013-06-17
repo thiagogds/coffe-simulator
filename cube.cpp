@@ -77,6 +77,12 @@ CubeExtractor::CubeExtractor(CubeID cube, App* app)
     static ElementVolumeWrapper mixedWrapper = {&mixedElement, 0};
 };
 
+CubeCup::CubeCup(CubeID cube, App* app) : calculateOn(false) {
+    mCube = cube;
+    mApp = app;
+    vid.attach(cube);
+}
+
 //########### Inits #################
 void CubeElements::init(){
     vid.initMode(BG0_ROM);
@@ -86,7 +92,10 @@ void CubeElements::init(){
 void CubeExtractor::init(){
     vid.initMode(BG0_ROM);
     vid.bg0rom.text(vec(1,2), this->extractors[activeExtractor]->name);
+}
 
+void CubeCup::init(){
+    vid.initMode(BG0_ROM);
 }
 //######## Get/Set/Others ##############
 void CubeExtractor::addElement(Element* element, float volume) {
@@ -98,6 +107,32 @@ void CubeExtractor::addElement(Element* element, float volume) {
         }
     }
 }
+
+void CubeCup::calculate() {
+    if (calculateOn) {
+        float intensity = Calculator::calculateIntensity(mApp->cubeExtractor);
+        float acidity = mApp->cubeExtractor->mixedElement.acidity;
+        float bitterness = mApp->cubeExtractor->mixedElement.bitterness;
+
+        String<20> str;
+
+        vid.bg0rom.text(vec(1,2), "                    ");
+        str << "Inten:" << FixedFP(intensity, 2, 2) << "\n";
+        vid.bg0rom.text(vec(1,2), str);
+
+        vid.bg0rom.text(vec(1,4), "                    ");
+        str = "";
+        str << "Acidez:" << FixedFP(acidity, 2, 2) << "\n";
+        vid.bg0rom.text(vec(1,4), str);
+
+        vid.bg0rom.text(vec(1,6), "                    ");
+        str = "";
+        str << "Amargor:" << FixedFP(bitterness, 2, 2) << "\n";
+        vid.bg0rom.text(vec(1,6), str);
+
+    }
+}
+
 //######## onTouch Events ############
 void CubeElements::rotate() {
     activeElement = (activeElement + 1) % ELEMENTS_NUMBER;
@@ -161,3 +196,16 @@ void CubeElements::onNeighborRemove(unsigned elementID,
     }
 }
 
+void CubeCup::onNeighborAdd(unsigned cupID,
+                            unsigned cupSide,
+                            unsigned neighborID,
+                            unsigned neighborSide){
+    calculateOn = true;
+}
+
+void CubeCup::onNeighborRemove(unsigned cupID,
+                            unsigned cupSide,
+                            unsigned neighborID,
+                            unsigned neighborSide){
+    calculateOn = false;
+}

@@ -5,7 +5,7 @@
 #include "calculators.h"
 
 float Calculator::calculateIntensity(CubeExtractor *extractor) {
-    return 0.5;
+    return 0.0;
 }
 
 void Calculator::mixTwoElements(CubeExtractor *extractor, unsigned firstWrapperIndex){

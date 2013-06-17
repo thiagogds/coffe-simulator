@@ -9,6 +9,7 @@ using namespace Sifteo;
 
 class CubeExtractor;
 class CubeElements;
+class CubeCup;
 
 class App {
 public:
@@ -16,6 +17,7 @@ public:
 
     CubeExtractor *cubeExtractor;
     CubeElements *cubeElements;
+    CubeCup *cubeCup;
 
     NOINLINE void init();
     NOINLINE void run();
