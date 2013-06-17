@@ -28,6 +28,7 @@ public:
 
     VideoBuffer vid;
 
+    const float SET_VOLUME;
     unsigned activeElement;
     bool connectedToExtractor;
 
@@ -43,7 +44,6 @@ public:
 
     void init();
     void rotate();
-    Element* getCurrentElement();
     void onTouch(unsigned id);
     void onAccelChange(unsigned id);
     void onNeighborAdd(unsigned firstID,
@@ -83,7 +83,7 @@ public:
 
     void init();
     void rotate();
-    Extractor* getCurrentExtractor();
+    void addElement(Element* element, float volume);
     void onTouch(unsigned id);
 };
 

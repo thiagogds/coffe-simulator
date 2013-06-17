@@ -5,7 +5,8 @@
 
 //########### Constructors ############
 CubeElements::CubeElements(CubeID cube, App* app)
-    : connectedToExtractor(false),
+    : SET_VOLUME(5.0),
+      connectedToExtractor(false),
       water("Agua", 0.0, 0.0),
       citric("Citrico", 0.7, 0.1),
       fruity("Frutado", 0.6, 0.2),
@@ -87,12 +88,13 @@ void CubeExtractor::init(){
 
 }
 //######## Get/Set/Others ##############
-Element* CubeElements::getCurrentElement() {
-    return elements[activeElement];
-}
-
-Extractor* CubeExtractor::getCurrentExtractor() {
-    return extractors[activeExtractor];
+void CubeExtractor::addElement(Element* element, float volume) {
+    for(unsigned i = 0 ; i < ELEMENTS_NUMBER ; i++) {
+        if(elements[i].element->isSameType(element)) {
+            elements[i].volume += volume;
+            break;
+        }
+    }
 }
 //######## onTouch Events ############
 void CubeElements::rotate() {
@@ -107,7 +109,14 @@ void CubeElements::onTouch(unsigned id) {
     CubeID cube(id);
 
     if(cube.isTouching()){
+        if(connectedToExtractor) {
+            mApp->cubeExtractor->addElement(elements[activeElement], SET_VOLUME);
+            for(unsigned i = 0 ; i < ELEMENTS_NUMBER ; i++){
+                LOG("Volume: %f \n", mApp->cubeExtractor->elements[i].volume);
+            }
+        }
     }
+
 }
 
 void CubeExtractor::onTouch(unsigned id) {
@@ -136,7 +145,7 @@ void CubeElements::onNeighborAdd(unsigned elementID,
                                  unsigned elementSide,
                                  unsigned neighborID,
                                  unsigned neighborSide){
-    if(neighborID == 1 && neighborSide == TOP && elementSide == BOTTOM){
+    if(neighborID == 1){
         connectedToExtractor = true;
     }
 }
