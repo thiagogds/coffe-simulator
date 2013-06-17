@@ -17,9 +17,9 @@ void App::init() {
     cubeElements->init();
 
     Events::cubeTouch.set(&App::onTouch, this);
-    //Events::cubeAccelChange.set(&App::onAccelChange, this);
     //Events::neighborAdd.set(&App::onNeighborAdd, this);
     //Events::neighborRemove.set(&App::onNeighborRemove, this);
+    Events::cubeAccelChange.set(&App::onAccelChange, this);
 }
 
 void App::run() {
@@ -38,13 +38,6 @@ void App::onTouch(unsigned id) {
     };
 }
 
-//void App::onAccelChange(unsigned id) {
-//    switch(id) {
-//        default: ; break ;
-//        case 0: cubeExtractors->onAccelChange(id); break ;
-//    };
-//}
-//
 //void App::onNeighborAdd(unsigned firstID,
 //                        unsigned firstSide,
 //                        unsigned secondID,
@@ -116,3 +109,10 @@ void App::onTouch(unsigned id) {
 //        //    break ;
 //    };
 //}
+void App::onAccelChange(unsigned id) {
+    switch(id) {
+        default: ; break ;
+        case 0: cubeElements->onAccelChange(id); break ;
+    };
+}
+

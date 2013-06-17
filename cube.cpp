@@ -5,7 +5,8 @@
 
 //########### Constructors ############
 CubeElements::CubeElements(CubeID cube, App* app)
-    : water("Agua", 0.0, 0.0),
+    : connectedToExtractor(false),
+      water("Agua", 0.0, 0.0),
       citric("Citrico", 0.7, 0.1),
       fruity("Frutado", 0.6, 0.2),
       almond("Amendoado", 0.5, 0.5),
@@ -15,6 +16,7 @@ CubeElements::CubeElements(CubeID cube, App* app)
     mCube = cube;
     mApp = app;
     vid.attach(cube);
+    motion[cube].attach(cube);
 
     static unsigned activeElement;
 
@@ -78,9 +80,6 @@ void CubeElements::onTouch(unsigned id) {
     CubeID cube(id);
 
     if(cube.isTouching()){
-        rotate();
-        vid.bg0rom.text(vec(1,2), "                    ");
-        vid.bg0rom.text(vec(1,2), this->elements[activeElement]->name);
     }
 }
 
@@ -93,3 +92,15 @@ void CubeExtractor::onTouch(unsigned id) {
         vid.bg0rom.text(vec(1,2), this->extractors[activeExtractor]->name);
     }
 }
+void CubeElements::onAccelChange(unsigned id)
+{
+    unsigned changeFlags = motion[id].update();
+    if (changeFlags) {
+        if (motion[id].shake) {
+            rotate();
+            vid.bg0rom.text(vec(1,2), "                    ");
+            vid.bg0rom.text(vec(1,2), this->elements[activeElement]->name);
+        }
+    }
+}
+

@@ -52,6 +52,7 @@ public:
     //                      unsigned firstSide,
     //                      unsigned secondID,
     //                      unsigned secondSide);
+    void onAccelChange(unsigned id);
 
 };
 
