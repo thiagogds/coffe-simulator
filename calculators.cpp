@@ -5,7 +5,10 @@
 #include "calculators.h"
 
 float Calculator::calculateIntensity(CubeExtractor *extractor) {
-    return 0.0;
+    float waterIntensity = extractor->mixedWrapper.volume / 30;
+    float extractorIntensity = extractor->extractors[extractor->activeExtractor]->intensity;
+
+    return extractorIntensity - waterIntensity;
 }
 
 void Calculator::mixTwoElements(CubeExtractor *extractor, unsigned firstWrapperIndex){
